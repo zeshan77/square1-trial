@@ -17,46 +17,50 @@
                         </div>
                     </div>
                     @endif
-                    <a class="text-blue float-right" href="{{ route('dashboard') }}">View all posts</a>
-                    <form method="POST" action="{{ route('store.post') }}">
-                        @csrf
 
-                        <!-- Post Title -->
-                        <div>
-                            <x-label for="title" :value="__('Title')" />
-                            <x-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title')" required autofocus />
-                            @error('title')
-                                <div class="text-red-500">{{ $message }}</div>
-                            @enderror
-                             <x-input id="user_id"  type="hidden" name="user_id" value="{{ auth()->user()->id }}" />
-                        </div>
+                    <a class="float-right inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md bg-gray-400 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" href="{{ route('dashboard') }}">View all posts</a>
+                    <div class="container mx-auto h-full flex justify-center items-center">
+        <div class="w-1/2">
+                        <form method="POST" action="{{ route('store.post') }}">
+                            @csrf
+                            <!-- Post Title -->
+                            <div>
+                                <x-label for="title" :value="__('Title')" />
+                                <x-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title')" required autofocus />
+                                @error('title')
+                                    <div class="text-red-500">{{ $message }}</div>
+                                @enderror
+                                 
+                            </div>
 
-                        <!-- Post Description -->
-                        <div class="mt-4">
-                            <x-label for="Description" :value="__('Description')" />
+                            <div class="mt-4">
+                                <x-label for="published date" :value="__('Published Date')" />
 
-                            <textarea id="description" class="block mt-1 w-full" type="description" name="description" 
-                            :value="old('description')" /></textarea>
-                            @error('description')
-                                <div class="text-red-500">{{ $message }}</div>
-                            @enderror
-                        </div>
+                                <x-input id="published_date" class="block mt-1 w-full" type="date" name="published_date" :value="old('published_date',\Carbon\Carbon::today()->format('Y-m-d'))" required autofocus />
+                                @error('published_date')
+                                    <div class="text-red-500">{{ $message }}</div>
+                                @enderror
+                            </div>
 
-                        <!-- Published date -->
-                        <div class="mt-4">
-                            <x-label for="published date" :value="__('Published Date')" />
+                            <!-- Post Description -->
+                            <div class="mt-4">
+                                <x-label for="Description" :value="__('Description')" />
 
-                            <x-input id="published_date" class="block mt-1 w-full" type="date" name="published_date" :value="old('published_date')" required autofocus />
-                            @error('published_date')
-                                <div class="text-red-500">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="flex items-center justify-end mt-4">
-                                    <x-button>
-                                        {{ __('Add Post') }}
-                                    </x-button>
-                        </div>
-                    </form>
+                                <textarea rows="9" cols="10" id="description" class="block mt-1 w-full rounded-md border-gray-300" type="description" name="description" required autofocus>{{ old('description') }}</textarea>
+                                @error('description')
+                                    <div class="text-red-500">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <!-- Published date -->
+                            
+                            <div class="flex items-center justify-end mt-4">
+                                        <x-button>
+                                            {{ __('Add Post') }}
+                                        </x-button>
+                            </div>
+                        </form>
+                    </div> </div>
                 </div>
             </div>
         </div>

@@ -10,9 +10,9 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
 
-                    <div class="bg-gray-200 p-2">
-                     <a class="text-blue " href="{{ route('dashboard') }}">View all posts</a>
-                      <a class="text-blue float-right" href="{{ route('create.post') }}">+ Add new post</a>
+                    <div class="bg-gray-600 p-2">
+                     <a class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md bg-gray-400 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" href="{{ route('dashboard') }}">View all posts</a>
+                      <a class="float-right inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md bg-gray-400 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" href="{{ route('create.post') }}">+ Add new post</a>
                     </div>
                     <h2 class="text-3xl">Post detail</h2>
 
@@ -22,16 +22,16 @@
                              <dl>
                                 <dt class="sr-only">Published on</dt>
                                 <dd class="text-base leading-6 font-medium text-gray-500">
-                                   <time datetime="2021-02-01T13:35:00.0Z">{{ $posts->published_date->diffForHumans() }}</time>
+                                   <time datetime="2021-02-01T13:35:00.0Z">{{ $post->published_date->diffForHumans() }}</time>
                                 </dd>
                              </dl>
                              <div class="space-y-5 xl:col-span-3">
                                 <div class="space-y-6">
-                                   <h2 class="text-2xl leading-8 font-bold tracking-tight"><a class="text-gray-900" href="/welcoming-david-luhr-to-tailwind-labs">{{ $posts->title }}</a></h2>
+                                   <h2 class="text-2xl leading-8 font-bold tracking-tight">{{ $post->title }}</h2>
                                    <div class="prose max-w-none text-gray-500">
                                       <p>
 
-                                          {{ $posts->description }}
+                                          {{ $post->description }}
                                       </p>
 
                                    </div>
