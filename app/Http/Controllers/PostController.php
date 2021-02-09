@@ -16,9 +16,9 @@ class PostController extends Controller
 
     {
 
-        return view($this->userPostView.'index',[
+        return view('dashboard',[
 
-        	"allposts"=> Post::orderBy('published_date', 'desc')->get() ?? []
+        	"allposts"=> Post::where('user_id',auth()->user()->id)->orderBy('published_date', 'desc')->get() ?? []
         ]);
     }
     
@@ -42,5 +42,15 @@ class PostController extends Controller
                    ->with('message','New post is saved');
         }
 
+    }
+    
+    // post detials
+    public function show_post(Post $post) {
+        
+        //dd($post);
+        return view($this->userPostView.'show',[
+
+        	"post"=> $post
+        ]);
     }
 }

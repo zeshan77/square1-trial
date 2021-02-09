@@ -24,4 +24,9 @@ class Post extends Model
 
     	return $this->belongsTo(User::class);
     }
+
+    public function getPublishedDateAttribute()
+    {
+        return date('d F, Y', strtotime($this->attributes['published_date']));
+    }
 }

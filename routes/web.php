@@ -18,14 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['middleware'=>['auth']] , function(){
+Route::group(['prefix'=>'dashboard', 'middleware'=>['auth']] , function(){
 
-
-	Route::get('/dashboard', function () {
-	    return view('dashboard');
-	})->name('dashboard');
-
-	Route::get('/all-post', [PostController::class, 'index']);
+	Route::get('/', [PostController::class, 'index'])->name('dashboard');
+	Route::get('/post-detail/{post}', [PostController::class, 'show_post'])->name('show.post');
 	Route::get('/create-post', [PostController::class, 'create_post'])->name('create.post');
 	Route::post('/store-post', [PostController::class, 'store_post'])->name('store.post');
 
