@@ -15,7 +15,11 @@ use App\Http\Controllers\PostController;
 */
 
 Route::get('/', function () {
-    $posts = \App\Models\Post::published()->paginate(2);
+    $sort = request('sort', 'desc');
+
+    $posts = \App\Models\Post::published()
+        ->orderBy('published_date', $sort)
+        ->paginate(2);
     return view('index', compact('posts'));
 });
 

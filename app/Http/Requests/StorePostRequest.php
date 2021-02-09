@@ -24,12 +24,12 @@ class StorePostRequest extends FormRequest
     public function rules()
     {
         return [
-            
-            'post_title' => 'required|min:3|max:190',
+
+            'post_title' => 'required|min:3|max:255',
             'post_description' => 'required|min:10|max:500',
-            'published_date' => 'required',        
+            'published_date' => 'required',
         ];
     }
 
-   
+
 }

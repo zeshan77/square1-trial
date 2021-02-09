@@ -27,7 +27,6 @@
                         </div>
                         <div class="hidden md:block">
                             <div class="ml-10 flex items-baseline space-x-4">
-                                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                                 <a href="/" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
                             </div>
                         </div>
@@ -37,12 +36,20 @@
                             <!-- Profile dropdown -->
                             <div class="ml-3 relative" x-data="{ showDropdown: false }">
                                 <div>
-                                    <button
-                                        x-on:click="showDropdown = true"
-                                        class="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu" aria-haspopup="true">
-                                        <span class="sr-only">Open user menu</span>
-                                        <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixqx=XRR6TJaxJK&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-                                    </button>
+                                    @auth
+                                        <button
+                                            x-on:click="showDropdown = true"
+                                            class="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu" aria-haspopup="true">
+                                            <span class="sr-only">Open user menu</span>
+                                            <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixqx=XRR6TJaxJK&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                                        </button>
+                                    @endauth
+                                    @guest
+                                        <div class="flex">
+                                            <a class="text-gray-300 mr-4 hover:underline" href="/login">Login</a>
+                                            <a class="text-gray-300 hover:underline" href="/register">Register</a>
+                                        </div>
+                                    @endguest
                                 </div>
                                 <div
                                     x-show="showDropdown"
@@ -67,26 +74,63 @@
 
         <main>
             <div class="max-w-prose mx-auto py-6 sm:px-6 lg:px-8">
+                <form action="" method="get">
+                    <select class="rounded-md" name="sort" id="sort" onchange="reloadPage(this.value)">
+                        <option value="desc" {{ request('sort', 'desc') === 'desc' ? 'selected' : '' }}>Newest first</option>
+                        <option value="asc" {{ request('sort') === 'asc' ? 'selected' : '' }}>Oldest first</option>
+                    </select>
+                </form>
                 <ul class="divide-y divide-gray-200">
                     @foreach($posts as $post)
                         <li class="py-4 mb-4">
                             <div class="flex space-x-3">
                                 <div class="flex-1 space-y-1">
                                     <div class="flex items-center justify-between pb-2">
-                                        <h3 class="text-sm font-medium">{{ $post->post_title }}</h3>
-                                        <p class="text-sm text-gray-500"><span title="">{{ $post->published_date->diffForHumans() }}</span></p>
+                                        <h3 class="text-sm font-medium w-4/5">{{ $post->post_title }}</h3>
+                                        <p class="text-sm text-gray-500"><span title="{{ $post->published_date->toDateString() }}">{{ $post->published_date->diffForHumans() }}</span></p>
                                     </div>
-                                    <p class="text-sm text-gray-500">{{ $post->post_description }}</p>
+                                    <p class="text-sm text-gray-500 w-4/5">{{ $post->post_description }}</p>
                                 </div>
                             </div>
                         </li>
                     @endforeach
                 </ul>
-                {{ $posts->links() }}
+                {{ $posts->appends($_GET)->links() }}
             </div>
         </main>
-
     </div>
+    <script>
+        function reloadPage(v) {
+            let uri = document.location.href;
+            let key = 'sort';
+            let value = v;
+            var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+            var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+            if (uri.match(re)) {
+                uri = uri.replace(re, '$1' + key + "=" + value + '$2');
+            }
+            else {
+                uri = uri + separator + key + "=" + value;
+            }
+
+            window.location.href = uri;
+
+            // let url = new URL(window.location.href);
+            // let params = new URLSearchParams(url.search.slice(1));
+            // params.append('foo', 4);
+            // console.log(params);
+
+            let sort = '';
+            // let url = window.location.href;
+
+            // if(window.location.href.includes('?')) {
+            //     sort = '&sort=' + v;
+            // } else {
+            //     sort = '?sort=' + v;
+            // }
+            // window.location.href = window.location.href + sort;
+        }
+    </script>
 </body>
 </html>
 

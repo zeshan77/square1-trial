@@ -30,13 +30,13 @@
                                    <h2 class="text-2xl leading-8 font-bold tracking-tight"><a class="text-gray-900" href="/welcoming-david-luhr-to-tailwind-labs">{{ $post->post_title }}</a></h2>
                                    <div class="prose max-w-none text-gray-500">
                                       <p>
-                                          
+
                                           {{ $post->post_description }}
                                       </p>
-                                      
+
                                    </div>
                                 </div>
-                               
+
                              </div>
                           </article>
                        </li>

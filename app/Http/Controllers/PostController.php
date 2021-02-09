@@ -9,47 +9,37 @@ use App\Models\Post;
 
 class PostController extends Controller
 {
-    //
-    protected $userPostView = 'userspost.';
-
     public function index()
-
     {
+        $posts = Post::where('user_id',auth()->user()->id)
+            ->orderBy('published_date', 'desc')
+            ->get();
 
         return view('dashboard',[
-
-        	"allposts"=> Post::where('user_id',auth()->user()->id)->orderBy('published_date', 'desc')->get() ?? []
+        	"posts"=>  $posts
         ]);
     }
-    
+
     // Add post view
-    public function create_post() {
-
-
-        return view($this->userPostView.'add');
-
+    public function create_post()
+    {
+        return view('posts.add');
     }
-    
+
     // Store Post
-    public function store_post(StorePostRequest $request) {
+    public function store_post(StorePostRequest $request)
+    {
+        auth()->user()->posts()->create($request->validated());
 
-
-        if ($request->validated()) {
-
-        	$post_saved = Post::create($request->all());
-            return redirect()
-                   ->route('create.post')
-                   ->with('message','New post is saved');
-        }
-
+        return redirect()
+               ->route('create.post')
+               ->with('message','New post is saved');
     }
-    
-    // post detials
-    public function show_post(Post $post) {
-        
-        //dd($post);
-        return view($this->userPostView.'show',[
 
+    // post details
+    public function show_post(Post $post)
+    {
+        return view('posts.show', [
         	"post"=> $post
         ]);
     }
