@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,11 +27,16 @@ Route::get('/', function () {
 Route::group(['prefix'=>'admin', 'middleware'=>['auth']] , function(){
 
 	Route::get('/', [PostController::class, 'index'])->name('dashboard');
+
 	Route::group(['prefix'=>'posts'] , function(){
 		Route::get('/{post}', [PostController::class, 'show'])->name('show.post');
 		Route::get('/create', [PostController::class, 'create'])->name('create.post');
 		Route::post('/store', [PostController::class, 'store'])->name('store.post');
     });
+
+	Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+	Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
 });
 
 

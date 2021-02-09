@@ -20,6 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'posts_endpoint',
     ];
 
     /**
@@ -40,6 +41,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static $admin_email = 'admin@system.com';
 
     public function posts()
     {
