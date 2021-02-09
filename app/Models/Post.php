@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder;
 
 class Post extends Model
 {
     use HasFactory;
 
     public $timestamps = false;
-    
+
     protected $fillable = [
         'post_title',
         'post_description',
@@ -18,15 +19,17 @@ class Post extends Model
         'published_date'
     ];
 
-    public function user()
+    protected $casts = [
+        'published_date' => 'datetime:Y-m-d',
+    ];
 
+    public function scopePublished($query)
     {
-
-    	return $this->belongsTo(User::class);
+        return $query->where('published_date', '<=', now());
     }
 
-    public function getPublishedDateAttribute()
+    public function user()
     {
-        return date('d F, Y', strtotime($this->attributes['published_date']));
+    	return $this->belongsTo(User::class);
     }
 }

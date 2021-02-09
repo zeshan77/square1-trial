@@ -15,7 +15,8 @@ use App\Http\Controllers\PostController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $posts = \App\Models\Post::published()->paginate(2);
+    return view('index', compact('posts'));
 });
 
 Route::group(['prefix'=>'dashboard', 'middleware'=>['auth']] , function(){
