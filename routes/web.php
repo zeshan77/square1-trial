@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,9 @@ Route::group(['prefix'=>'dashboard', 'middleware'=>['auth']] , function(){
 	Route::get('/post-detail/{post}', [PostController::class, 'show'])->name('show.post');
 	Route::get('/create-post', [PostController::class, 'create'])->name('create.post');
 	Route::post('/store-post', [PostController::class, 'store'])->name('store.post');
+	Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+	Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
 
 });
 

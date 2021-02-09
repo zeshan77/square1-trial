@@ -16,7 +16,7 @@ class Post extends Model
         'title',
         'description',
         'user_id',
-        'published_date'
+        'published_date',
     ];
 
     protected $casts = [
