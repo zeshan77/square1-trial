@@ -26,9 +26,9 @@ Route::get('/', function () {
 Route::group(['prefix'=>'dashboard', 'middleware'=>['auth']] , function(){
 
 	Route::get('/', [PostController::class, 'index'])->name('dashboard');
-	Route::get('/post-detail/{post}', [PostController::class, 'show_post'])->name('show.post');
-	Route::get('/create-post', [PostController::class, 'create_post'])->name('create.post');
-	Route::post('/store-post', [PostController::class, 'store_post'])->name('store.post');
+	Route::get('/post-detail/{post}', [PostController::class, 'show'])->name('show.post');
+	Route::get('/create-post', [PostController::class, 'create'])->name('create.post');
+	Route::post('/store-post', [PostController::class, 'store'])->name('store.post');
 
 });
 

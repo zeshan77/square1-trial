@@ -13,8 +13,8 @@ class Post extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'post_title',
-        'post_description',
+        'title',
+        'description',
         'user_id',
         'published_date'
     ];

@@ -5,8 +5,7 @@
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
-
-<div class="py-12">
+    <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
@@ -24,9 +23,11 @@
 
                         <!-- Post Title -->
                         <div>
-                            <x-label for="post title" :value="__('Post Title')" />
-
-                            <x-input id="post_title" class="block mt-1 w-full" type="text" name="post_title" :value="old('post_title')" required autofocus />
+                            <x-label for="title" :value="__('Title')" />
+                            <x-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title')" required autofocus />
+                            @error('title')
+                                <div class="text-red-500">{{ $message }}</div>
+                            @enderror
                              <x-input id="user_id"  type="hidden" name="user_id" value="{{ auth()->user()->id }}" />
                         </div>
 
@@ -34,15 +35,21 @@
                         <div class="mt-4">
                             <x-label for="Description" :value="__('Description')" />
 
-                            <textarea id="post_description" class="block mt-1 w-full" type="post_description" name="post_description" 
-                            :value="old('post_description')" /></textarea>
+                            <textarea id="description" class="block mt-1 w-full" type="description" name="description" 
+                            :value="old('description')" /></textarea>
+                            @error('description')
+                                <div class="text-red-500">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <!-- Published date -->
                         <div class="mt-4">
-                             <x-label for="published date" :value="__('Published Date')" />
+                            <x-label for="published date" :value="__('Published Date')" />
 
                             <x-input id="published_date" class="block mt-1 w-full" type="date" name="published_date" :value="old('published_date')" required autofocus />
+                            @error('published_date')
+                                <div class="text-red-500">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="flex items-center justify-end mt-4">
                                     <x-button>

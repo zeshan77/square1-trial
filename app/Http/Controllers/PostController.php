@@ -15,19 +15,21 @@ class PostController extends Controller
             ->orderBy('published_date', 'desc')
             ->get();
 
+            //dd($posts);
+
         return view('dashboard',[
         	"posts"=>  $posts
         ]);
     }
 
     // Add post view
-    public function create_post()
+    public function create()
     {
         return view('posts.add');
     }
 
     // Store Post
-    public function store_post(StorePostRequest $request)
+    public function store(StorePostRequest $request)
     {
         auth()->user()->posts()->create($request->validated());
 
@@ -37,7 +39,7 @@ class PostController extends Controller
     }
 
     // post details
-    public function show_post(Post $post)
+    public function show(Post $post)
     {
         return view('posts.show', [
         	"post"=> $post

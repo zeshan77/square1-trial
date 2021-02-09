@@ -22,16 +22,16 @@
                              <dl>
                                 <dt class="sr-only">Published on</dt>
                                 <dd class="text-base leading-6 font-medium text-gray-500">
-                                   <time datetime="2021-02-01T13:35:00.0Z">{{ $post->PublishedDate }}</time>
+                                   <time datetime="2021-02-01T13:35:00.0Z">{{ $posts->published_date->diffForHumans() }}</time>
                                 </dd>
                              </dl>
                              <div class="space-y-5 xl:col-span-3">
                                 <div class="space-y-6">
-                                   <h2 class="text-2xl leading-8 font-bold tracking-tight"><a class="text-gray-900" href="/welcoming-david-luhr-to-tailwind-labs">{{ $post->post_title }}</a></h2>
+                                   <h2 class="text-2xl leading-8 font-bold tracking-tight"><a class="text-gray-900" href="/welcoming-david-luhr-to-tailwind-labs">{{ $posts->title }}</a></h2>
                                    <div class="prose max-w-none text-gray-500">
                                       <p>
 
-                                          {{ $post->post_description }}
+                                          {{ $posts->description }}
                                       </p>
 
                                    </div>
