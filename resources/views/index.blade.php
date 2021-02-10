@@ -89,7 +89,7 @@
                                         <h3 class="text-sm font-medium w-4/5">{{ $post->title }}</h3>
                                         <p class="text-sm text-gray-500"><span title="{{ $post->publication_date->toDateString() }}">{{ $post->publication_date->diffForHumans() }}</span></p>
                                     </div>
-                                    <p class="text-sm text-gray-500 w-4/5">{{ $post->description }}</p>
+                                    <p class="text-sm text-gray-500 w-4/5">{{ \Illuminate\Support\Str::limit($post->description, 300) }}</p>
                                 </div>
                             </div>
                         </li>
