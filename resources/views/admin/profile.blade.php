@@ -31,7 +31,7 @@
                                 </label>
                                 <div class="mt-1 sm:mt-0 sm:col-span-2">
                                     <div class="max-w-lg flex rounded-md shadow-sm">
-                                        <input value="{{ old('posts_endpoint', auth()->user()->posts_endpoint) }}" type="url" name="posts_endpoint" id="posts-endpoint" placeholder="https://google.com" class="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300">
+                                        <input value="{{ old('posts_endpoint', auth()->user()->posts_endpoint) }}" type="url" name="posts_endpoint" id="posts-endpoint" placeholder="https://google.com" class="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-md sm:text-sm border-gray-300">
                                     </div>
                                     @error('posts_endpoint') <div class="text-sm text-red-500">{{ $message }}</div> @enderror
                                 </div>
