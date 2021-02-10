@@ -21,6 +21,20 @@ php artisan serve # Start browsing
 
 ```
 
+## To import blog posts
+Posts can be imported in two ways:
+#### Via UI
+1. Add end point to your user profile by clicking on 'Profile' from the dropdown in top-right menu item.
+2. Go to Posts section and click on 'Import Posts' link
+
+_Queue needs to be running in order to process posts._
+
+#### Via artisan command
+1. Follow step 1 in 'Via UI'
+2. Run this artisan command from the projects' root folder in terminal: ```php artisan import-posts {userID}```
+
+Replace `{userID}` with id in `users` table of the user.
+
 ### Further improvements
 
 - Use rich text editor for storing/showing blog contents

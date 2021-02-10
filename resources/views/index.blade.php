@@ -73,6 +73,7 @@
 
         <main>
             <div class="max-w-prose mx-auto py-6 sm:px-6 lg:px-8">
+                @if($posts->count())
                 <form action="" method="get">
                     <select class="rounded-md" name="sort" id="sort" onchange="reloadPage(this.value)">
                         <option value="desc" {{ request('sort', 'desc') === 'desc' ? 'selected' : '' }}>Newest first</option>
@@ -95,6 +96,9 @@
                     @endforeach
                 </ul>
                 {{ $posts->appends($_GET)->links() }}
+                @else
+                    <p class="text-center py-8">No posts found. Go create an account and start adding posts :)</p>
+                @endif
             </div>
         </main>
     </div>
