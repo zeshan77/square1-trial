@@ -16,10 +16,10 @@
                     </div>
                     @endif
 
-                    <a class="float-right inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md bg-gray-400 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" href="{{ route('dashboard') }}">View all posts</a>
+                    <a class="float-right inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md bg-gray-400 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" href="{{ route('posts.index') }}">View all posts</a>
                     <div class="container mx-auto h-full flex justify-center items-center">
-        <div class="w-1/2">
-                        <form method="POST" action="{{ route('store.post') }}">
+                        <div class="w-1/2">
+                            <form method="POST" action="{{ route('posts.store') }}">
                             @csrf
                             <!-- Post Title -->
                             <div>
@@ -32,10 +32,10 @@
                             </div>
 
                             <div class="mt-4">
-                                <x-label for="published date" :value="__('Published Date')" />
+                                <x-label for="publication date" :value="__('Publication Date')" />
 
-                                <x-input id="published_date" class="block mt-1 w-full" type="date" name="published_date" :value="old('published_date',\Carbon\Carbon::today()->format('Y-m-d'))" required autofocus />
-                                @error('published_date')
+                                <x-input id="publication_date" class="block mt-1 w-full" type="date" name="publication_date" :value="old('publication_date',\Carbon\Carbon::today()->format('Y-m-d'))" required autofocus />
+                                @error('publication_date')
                                     <div class="text-red-500">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -50,15 +50,10 @@
                                 @enderror
                             </div>
 
-                            <!-- Published date -->
-
-                            <div class="flex items-center justify-end mt-4">
-                                        <x-button>
-                                            {{ __('Add Post') }}
-                                        </x-button>
-                            </div>
+                            <div class="flex items-center justify-end mt-4"><x-button>{{ __('Add Post') }}</x-button></div>
                         </form>
-                    </div> </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -86,10 +86,10 @@
                             <div class="flex space-x-3">
                                 <div class="flex-1 space-y-1">
                                     <div class="flex items-center justify-between pb-2">
-                                        <h3 class="text-sm font-medium w-4/5">{{ $post->post_title }}</h3>
-                                        <p class="text-sm text-gray-500"><span title="{{ $post->published_date->toDateString() }}">{{ $post->published_date->diffForHumans() }}</span></p>
+                                        <h3 class="text-sm font-medium w-4/5">{{ $post->title }}</h3>
+                                        <p class="text-sm text-gray-500"><span title="{{ $post->publication_date->toDateString() }}">{{ $post->publication_date->diffForHumans() }}</span></p>
                                     </div>
-                                    <p class="text-sm text-gray-500 w-4/5">{{ $post->post_description }}</p>
+                                    <p class="text-sm text-gray-500 w-4/5">{{ $post->description }}</p>
                                 </div>
                             </div>
                         </li>
@@ -114,21 +114,6 @@
             }
 
             window.location.href = uri;
-
-            // let url = new URL(window.location.href);
-            // let params = new URLSearchParams(url.search.slice(1));
-            // params.append('foo', 4);
-            // console.log(params);
-
-            let sort = '';
-            // let url = window.location.href;
-
-            // if(window.location.href.includes('?')) {
-            //     sort = '&sort=' + v;
-            // } else {
-            //     sort = '?sort=' + v;
-            // }
-            // window.location.href = window.location.href + sort;
         }
     </script>
 </body>

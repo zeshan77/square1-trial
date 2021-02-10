@@ -18,7 +18,8 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->foreignId('user_id')->constrained();
-            $table->timestamp('published_date');
+            $table->timestamp('publication_date');
+            $table->timestamps();
         });
     }
 

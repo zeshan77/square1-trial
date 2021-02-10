@@ -15,6 +15,9 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('posts.index')" :active="request()->is('*posts*')">
+                        Posts
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -44,7 +47,7 @@
                             </x-dropdown-link>
                         </form>
                         <div>
-                            <a href="/dashboard/profile" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">Profile</a>
+                            <a href="{{ route('profile.index') }}" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">Profile</a>
                         </div>
                     </x-slot>
                 </x-dropdown>

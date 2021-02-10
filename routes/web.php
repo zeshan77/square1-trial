@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,24 +16,21 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
-Route::get('/', function () {
-    $sort = request('sort', 'desc');
-
-    $posts = \App\Models\Post::published()
-        ->orderBy('published_date', $sort)
-        ->paginate(2);
-    return view('index', compact('posts'));
-});
+Route::get('/', HomeController::class);
 
 Route::group(['prefix'=>'admin', 'middleware'=>['auth']] , function(){
 
-	Route::get('/', [PostController::class, 'index'])->name('dashboard');
+    Route::view('/', 'admin.dashboard')->name('dashboard');
 
-	Route::group(['prefix'=>'posts'] , function(){
-        Route::get('/create', [PostController::class, 'create'])->name('create.post');
-        Route::post('/store', [PostController::class, 'store'])->name('store.post');
-        Route::get('/{post}', [PostController::class, 'show'])->name('show.post');
-    });
+	Route::name('posts.')
+        ->prefix('posts')
+        ->group(function() {
+            Route::get('/', [PostController::class, 'index'])->name('index');
+            Route::get('/create', [PostController::class, 'create'])->name('create');
+            Route::post('/store', [PostController::class, 'store'])->name('store');
+            Route::get('/import', [PostController::class, 'import'])->name('import');
+            Route::get('/{post}', [PostController::class, 'show'])->name('show');
+        });
 
 	Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
 	Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
